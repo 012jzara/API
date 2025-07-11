@@ -14,7 +14,7 @@ app.use(cors());
 app.use(express.json());
 
 const conectarMongo = require('./utils/conectarMongo');
-conectarMongo('mongodb://localhost:27017/biopets');
+conectarMongo(process.env.MONGO_URI);
 
 app.use('/api/citas', citaRoutes);
 app.use('/api/clientes', clienteRoutes);
