@@ -14,7 +14,14 @@ app.use(cors());
 app.use(express.json());
 
 const conectarMongo = require('./utils/conectarMongo');
-conectarMongo(process.env.MONGO_URI);
+const uriMongo = process.env.MONGO_URI;
+
+if (!uriMongo) {
+  console.error('❌ ERROR: MONGO_URI no está definida en las variables de entorno');
+  process.exit(1);
+}
+
+conectarMongo(uriMongo);
 
 app.use('/api/citas', citaRoutes);
 app.use('/api/clientes', clienteRoutes);
